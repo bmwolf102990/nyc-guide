@@ -6,7 +6,13 @@ from nyc.boroughs import boroughs
 
 class CityView(View):
     def get(self, request):
-        return render(request=request, template_name='city.html', context={'boroughs': boroughs.keys()})
+        return render(
+            request=request,
+            template_name='city.html',
+            context={
+                'boroughs': boroughs.keys()
+            }
+        )
 
 
 class BoroughView(View):
@@ -14,7 +20,10 @@ class BoroughView(View):
         return render(
             request=request,
             template_name='borough.html',
-            context={'borough': borough, 'activities': boroughs[borough].keys()},
+            context={
+                'borough': borough,
+                'activities': boroughs[borough].keys()
+            },
         )
 
 
@@ -30,6 +39,11 @@ class ActivityView(View):
             },
         )
 
+'''
 
+Christy - If you look at the context in each of the three previous views you will see a definite pattern emerging.
+You can use this pattern to help figure out how to set the context for 'VenueView'.
+
+'''
 class VenueView(View):
     pass

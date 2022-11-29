@@ -39,11 +39,15 @@ class ActivityView(View):
             },
         )
 
-'''
 
-Christy - If you look at the context in each of the three previous views you will see a definite pattern emerging.
-You can use this pattern to help figure out how to set the context for 'VenueView'.
-
-'''
 class VenueView(View):
-    pass
+    def get(self, request, borough, activity, venue):
+        return render(
+            request=request,
+            template_name='venues.html',
+            context={
+                'borough': borough,
+                'activity': activity,
+                'venues': boroughs[borough][activity][venue].keys(),
+            },
+        )

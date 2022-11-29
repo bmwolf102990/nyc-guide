@@ -46,8 +46,7 @@ class VenueView(View):
             request=request,
             template_name='venues.html',
             context={
-                'borough': borough,
-                'activity': activity,
-                'venues': boroughs[borough][activity][venue].keys(),
+                'venue': venue,
+                'venue_description': boroughs[borough][activity][venue]['description'],
             },
         )

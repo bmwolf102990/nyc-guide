@@ -6,7 +6,13 @@ from nyc.boroughs import boroughs
 
 class CityView(View):
     def get(self, request):
-        return render(request=request, template_name='city.html', context={'boroughs': boroughs.keys()})
+        return render(
+            request=request,
+            template_name='city.html',
+            context={
+                'boroughs': boroughs.keys()
+            }
+        )
 
 
 class BoroughView(View):
@@ -14,13 +20,33 @@ class BoroughView(View):
         return render(
             request=request,
             template_name='borough.html',
-            context={'borough': borough, 'activities': boroughs[borough].keys()},
+            context={
+                'borough': borough,
+                'activities': boroughs[borough].keys()
+            },
         )
 
 
 class ActivityView(View):
-    pass
+    def get(self, request, borough, activity):
+        return render(
+            request=request,
+            template_name='activities.html',
+            context={
+                'borough': borough,
+                'activity': activity,
+                'venues': boroughs[borough][activity].keys(),
+            },
+        )
 
 
 class VenueView(View):
-    pass
+    def get(self, request, borough, activity, venue):
+        return render(
+            request=request,
+            template_name='venues.html',
+            context={
+                'venue': venue,
+                'venue_description': boroughs[borough][activity][venue]['description'],
+            },
+        )
